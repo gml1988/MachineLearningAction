@@ -24,6 +24,8 @@ test_set = tf.contrib.learn.datasets.base.load_csv_with_header(
     target_dtype=np.int,
     features_dtype=np.float32)
 
+# Just like a place holder. The feature vector that will be filled into the Classifier will be
+# Dimension = 4, the value type will be float
 feature_columns = [tf.contrib.layers.real_valued_column("", dimension=4)]
 
 classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
