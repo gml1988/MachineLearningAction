@@ -29,7 +29,7 @@ ax.scatter(x_data, y_data)
 plt.ion()
 plt.show()
 
-for i in range(1000):
+for i in range(100):
     session.run(train_step, feed_dict={xs: x_data, ys: y_data})
     if i % 50 == 0:
         # To see the improvement for each step
@@ -101,3 +101,31 @@ output = tf.multiply(input1, input2)
 
 with tf.Session() as session:
     print(session.run([output], feed_dict = {input1: [7.], input2: [2.]}))
+
+############################################################
+# Matrix shape
+############################################################
+BATCH_START = 0
+TIME_STEPS = 2
+BATCH_SIZE = 2
+
+# xs shape (50 batches, 20 steps)
+# generate the evenly spaced value in this range [BATCH_START, BATCH_START + TIME_STEPS * BATCH_SIZE)
+xs = np.arange(BATCH_START, BATCH_START + TIME_STEPS * BATCH_SIZE).reshape((BATCH_SIZE, TIME_STEPS))
+ys_1 = xs * 10
+ys_2 = xs * 100
+print(xs)
+print(ys_1)
+print(ys_2)
+print(ys_1[:,:,np.newaxis])
+res = [ys_1[:,:,np.newaxis], ys_2[:,:,np.newaxis], xs]
+print(res)
+
+with tf.Session() as session:
+    print(session.run(tf.reshape(xs, [-1])))
+
+#ys_3 = [[1,2,3]]
+#ys_4 = [[4,5,6]]
+#xs_1 = [[7,8,9]]
+#res_1 = [ys_3[:,:,np.newaxis], ys_4[:,:,np.newaxis], xs_1]
+#print(res_1)
